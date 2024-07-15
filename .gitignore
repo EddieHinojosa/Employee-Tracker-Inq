@@ -1,0 +1,4 @@
+# files to ignore
+
+.dotenv
+node_modules

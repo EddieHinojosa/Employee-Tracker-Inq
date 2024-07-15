@@ -1,0 +1,26 @@
+{
+  "name": "employee-tracker-inq",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddieHinojosa/Employee-Tracker-Inq.git"
+  },
+  "author": "Eddie Hinojosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EddieHinojosa/Employee-Tracker-Inq/issues"
+  },
+  "homepage": "https://github.com/EddieHinojosa/Employee-Tracker-Inq#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "inquirer": "^8.2.4",
+    "pg": "^8.12.0"
+  }
+}
