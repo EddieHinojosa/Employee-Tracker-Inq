@@ -1,13 +1,13 @@
-\c employees_db;
+\c employees_tracker_db;
 
-INSERT INTO Department(name)
+INSERT INTO Department(Dept_Name)
 VALUES 
     ('Sales'), 
     ('Engineer'), 
     ('Finance'), 
     ('Legal');
 
-INSERT INTO Role (Department_Id, Title, Salary)
+INSERT INTO Roles (Dept_Id, Title, Salary)
 VALUES 
     (1, 'Sales Lead', 100000),
     (1, 'Salesperson', 80000),
