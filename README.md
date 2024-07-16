@@ -16,6 +16,8 @@
 
 ## How It Works:
 
+in terminal run `npm start`
+
 
 ```js
 GIVEN a command-line application that accepts user input
