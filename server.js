@@ -101,7 +101,7 @@ function inputSelection() {
     });
 };
 
-//VIEW ALL section 👇👇👇👇👇
+//VIEW ALL section 👇👇👇👇👇-----------------------------------------------
 
 //View All employees
 function viewAllEmployees() {
@@ -142,41 +142,56 @@ function viewAllDepartments() {
     })
 };
 
-//VIEW ALL section  👆👆👆👆👆
+//VIEW ALL section  👆👆👆👆👆-----------------------------------------------
 
-//------------------------------------------------------------
 
-//ADD section 👇👇👇👇👇
+
+//ADD section 👇👇👇👇👇-----------------------------------------------
 
 
 //Add Employee
-function addEmployee() {
+async function addEmployee() {
+    const {rows: Roles} = await pool.query("SELECT * FROM Roles");
+    const {rows: Manager } = await pool.query("SELECT * FROM Employee");
+    
+    const rolesList = Roles.map((role) => ({
+        name: role.title,
+        value: role.id,
+    }));
+
+    const managerList = Manager.map((Manager) => ({
+        name: `${Manager.First_Name} ${Manager.Last_Name}`,
+        value: Manager.id,
+    }));
+
     inquirer.prompt([
         {
-            name: "first_name",
+            name: "First_Name",
             type: "input",
             message: "Enter employee's first name",
         },
         {
-            name: "last_name",
+            name: "Last_Name",
             type: "input",
             message: "Enter employee's last name",
         },
         {
-            name: "role_id",
-            type: "input",
-            message: "Enter employee's role ID",
+            name: "Role_id",
+            type: "list",
+            message: "Enter employee's role",
+            choices: rolesList
         },
         {
-            name: "manager_id",
-            type: "input",
-            message: "Enter employee's manager ID",
+            name: "Manager_id",
+            type: "list",
+            message: "Enter employee's manager",
+            choices: managerList
         },
     ])
     .then((answer) => {
         pool.query(
-            "INSERT INTO Employee (First_Name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)",
-            [answer.first_name, answer.last_name, answer.role_id, answer.manager_id],
+            "INSERT INTO Employee (First_Name, Last_Name, Role_id, Manager_id) VALUES ($1, $2, $3, $4)",
+            [answer.First_Name, answer.Last_Name, answer.Role_id, answer.Manager_id],
             (err, res) => {
                 if (err) {
                     console.error(err);
@@ -232,6 +247,34 @@ async function addRole() {
     });
 };
 
+//Add Department
+function addDepartment() {
+    inquirer.prompt([
+        {
+            name: "Dept_Name",
+            type: "input",
+            message: "Enter department name",
+        },
+    ])
+    .then((answer) => {
+        pool.query(
+            "INSERT INTO Department (Dept_Name) VALUES ($1)",
+            [answer.Dept_Name],
+            (err, res) => {
+                if (err) {
+                    console.error(err);
+                    return inputSelection();
+                }
+                console.log(`Department ${answer.Dept_Name} added successfully`);
+                inputSelection();
+            }
+        );
+    });
+};
+
+
+
+//ADD ALL section  👆👆👆👆👆-----------------------------------------------
 
 
 
